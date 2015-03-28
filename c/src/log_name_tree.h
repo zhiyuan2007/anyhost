@@ -32,13 +32,15 @@ struct name_tree {
 	lru_list_t *lru;
 };
 
+typedef (*del_node)(void *manager, void *data);
+
 name_tree_t *   name_tree_create();
 uint64_t name_tree_get_size(name_tree_t *tree); 
 void            name_tree_destroy(name_tree_t *tree);
 int name_tree_insert(name_tree_t *tree,
                         const char *name);
 int             name_tree_delete(name_tree_t *tree,
-                        const char *name);
+                        const char *name, del_node del_func);
 node_value_t *name_tree_exactly_find(name_tree_t *tree,
                         const char *name);
 node_value_t *name_tree_closely_find(name_tree_t *tree,

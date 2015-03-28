@@ -57,6 +57,12 @@ int clean_suite1(void)
 	return 0;
 }
 
+void *del_node_func(void *manager, void *data) {
+	lru_list_t *lru = manager; 
+	lru_node_t *node = data;
+	lru_list_delete(lru,  node);
+}
+
 void test_name_tree_size(void)
 {
     uint64_t initsize = sizeof(name_tree_t) + MAX_HEAP_NODE_NUM * sizeof(void *) + sizeof(heap_t) + 2 * mem_pool_struct_size();
@@ -73,7 +79,7 @@ void test_name_tree_size(void)
 
 	CU_ASSERT_EQUAL(initsize + 2 * nodesize, name_tree_get_size(name_tree));
 
-	domain = "1234567890.1234567890.1234567890.cn";
+	domain = "1234567890.1234567890.1234567890.cn";//exceed 31
 	int n = name_tree_insert(name_tree, domain);
 	CU_ASSERT_EQUAL(n, -1);
 
@@ -93,11 +99,12 @@ void test_name_tree_size(void)
 	CU_ASSERT_EQUAL(initsize + 3 * nodesize, name_tree_get_size(name_tree));
 
 	domain = "www.baidu.com";
-	name_tree_delete(name_tree, domain);
+	name_tree_delete(name_tree, domain, del_node_func);
+	printf("name tree size %lld , should %lld, count %lld\n", (initsize + 2*nodesize), name_tree_get_size(name_tree), name_tree->count);
 	CU_ASSERT_EQUAL(initsize + 2 * nodesize, name_tree_get_size(name_tree));
 
 	domain = "www.googlechina.com.cn";
-	name_tree_delete(name_tree, domain);
+	name_tree_delete(name_tree, domain, del_node_func);
 	CU_ASSERT_EQUAL(initsize + 1 * nodesize, name_tree_get_size(name_tree));
 
 }

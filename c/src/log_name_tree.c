@@ -176,7 +176,7 @@ name_tree_insert(name_tree_t *tree, const char *name)
 
 int
 name_tree_delete(name_tree_t *tree,
-                    const char *name)
+                    const char *name, del_node del_func)
 {
     if (!name || (strlen(name) >= MAX_NAME_LEN))
         return -1;
@@ -190,7 +190,8 @@ name_tree_delete(name_tree_t *tree,
     if (!del_node)
         return -1;
 
-	//lru_list_delete(tree->lru,  ((node_value_t *)del_node->value)->ptr);
+	if (del_func)
+		del_func( tree->lru, ((node_value_t *)del_node->value)->ptr);
     mem_pool_free(tree->name_pool, del_node->value);
     mem_pool_free(tree->node_pool, (void *)del_node);
 

@@ -102,7 +102,7 @@ void view_stats_set_memsize(view_stats_t *vs, uint64_t expect_size){
 		if (node == NULL) {
 			break;
 		}
-		name_tree_delete(vs->name_tree, node->fqdn);
+		name_tree_delete(vs->name_tree, node->fqdn, NULL);
 	    current_size = view_stats_get_size(vs);
 	}
 	while (expect_size < current_size) {
@@ -111,7 +111,7 @@ void view_stats_set_memsize(view_stats_t *vs, uint64_t expect_size){
 		if (node == NULL) {
 			break;
 		}
-		name_tree_delete(vs->ip_tree, node->fqdn);
+		name_tree_delete(vs->ip_tree, node->fqdn, NULL);
 	    current_size = view_stats_get_size(vs);
 	}
 }
