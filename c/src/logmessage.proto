@@ -1,0 +1,17 @@
+message LogMessage {
+     optional string id=1;
+     required int32 date=2; 
+     required int32 port=3;
+     required string cip=4; 
+     required string view=5;
+     required string domain=6;
+     required string cls=7;
+     required string rtype=8;
+     required string rcode=9;
+     optional int32 recur=10;
+     optional int32 signed=11;
+     optional int32 edns=12;
+     optional int32 tcp=13;
+     optional int32 dnssec=14;
+     optional int32 cd=15;
+}

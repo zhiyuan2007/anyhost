@@ -1,0 +1,19 @@
+message StatsRequest {
+     required string key=2; 
+     required string view=3;
+     optional int32 topn=4;
+}
+
+message MsgCell {
+    optional string name=1;
+    optional int32 count=2;
+}
+
+message StatsReply{
+     optional string key=2; 
+     optional string maybe=3;
+     optional float value=4;
+     repeated MsgCell result=5;
+     repeated string name=6;
+     repeated int32 count=7;
+}

@@ -1,0 +1,8 @@
+message QpsMessage {
+     optional int32 id=1;
+     required float qps=2; 
+     optional string result=3;
+     optional string view=4;
+     optional string zone=5;
+     optional fixed32 time=6; 
+}
