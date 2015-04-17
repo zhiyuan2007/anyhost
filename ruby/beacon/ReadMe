@@ -1,0 +1,5 @@
+export the following environment
+BEACON_SOURCE //beacon source code path
+BEACON_HOME  //beacon generate all its file into this path
+
+run etc/restart.sh

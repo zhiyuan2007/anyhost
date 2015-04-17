@@ -1,0 +1,91 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'beacon'
+def show_helper
+    p "usage: beacon_sender [-r 127.0.0.1 -y yes|no -g default -m 202.173.9.28] -s Dumb -c max (-p 10,20|-f paras_file)||| beacon_sender [-r 127.0.0.1] -o purge -m ip -s Dumb"
+    exit 
+end
+
+def parse_opt(args)
+    options = {}
+    OptionParser.new do |opts|
+        opts.separator ""
+
+        opts.on("-r", "--rabbitmq rabbitmq_server", "rabbitmq server ip") do |r|
+            options[:rabbitmq_server] = r
+        end 
+
+        opts.on("-y", "--syn syn", "syn or asyn") do |r|
+            options[:syn] = r
+        end 
+
+        opts.on("-g", "--group group", "group name") do |g|
+            options[:group] = g
+        end 
+
+        opts.on("-m", "--member member", "member name") do |m|
+            options[:member] = m
+        end 
+
+        opts.on("-s", "--service service", "service name") do |ip|
+            options[:service] = ip 
+        end 
+
+        opts.on("-c", "--command command", "specify command will be send msg") do |cmd|
+            puts "cmd: #{cmd}"
+            options[:command] = cmd
+        end 
+
+        opts.on("-p", "--parameters parameter", Array, "parameter list") do |parameters|
+            options[:parameter] = parameters
+        end
+
+        opts.on("-f", "--parameters file", "parameter file") do |file|
+            options[:file] = file 
+        end
+
+        opts.on("-o", "--queue_op operation", "queue operation") do |o|
+            options[:operation] = o 
+        end
+
+        opts.on("-h", "--help", "show help info") do
+            show_helper
+        end
+
+    end.parse!(args)
+    options
+end
+options = parse_opt(ARGV)
+show_helper if ( options[:parameter].nil? && options[:file].nil? ) && options[:operation].nil?
+rabbitmq_server = options[:rabbitmq_server] || "127.0.0.1"
+syn = options[:syn] || "yes"
+group = options[:group] || "default"
+ip = options[:member] || "202.173.9.28"
+service = options[:service] || "Dumb"
+command = options[:command] || "max"
+operation = options[:operation]
+puts options[:parameter].to_s
+
+if operation = options[:operation]
+    if operation == 'purge'
+       puts `curl -X POST --silent http://#{rabbitmq_server}:5678/operation/purge/members/#{ip}/services/#{service}`
+    elsif operation == 'count'
+       puts `curl --silent http://#{rabbitmq_server}:5678/operation/count/members/#{ip}/services/#{service}`
+    end
+    exit
+end
+
+if options[:file].nil?
+    params = {"parameter" => options[:parameter]}.merge({"syn"=>syn})
+else
+    require options[:file]
+    params = {"parameter" => PARAMETER}.merge({"syn"=>syn})
+end
+puts ">>>you send cmd: #{command}|#{params} to #{group}|#{ip}|#{service}"
+@sender = Beacon::MYCURL.new(rabbitmq_server)
+r = @sender.group_send_cmd(group, ip, service, command, params)
+puts "<<<you get result: #{r.body}"
+if syn == "no"
+    sleep 1
+    puts "asyn result: #{@sender.get_result(JSON.load(r.body)["id"]).body}"
+end

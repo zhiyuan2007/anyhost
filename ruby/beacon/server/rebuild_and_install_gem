@@ -1,0 +1,2 @@
+gem build beacon.gemspec
+gem install beacon -l --no-ri --no-rdoc

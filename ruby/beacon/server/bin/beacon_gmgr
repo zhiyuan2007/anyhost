@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'beacon'
+def show_helper
+    p "usage: beacon_gmgr [-r 127.0.0.1] -c add|del|rename -g group [-n new_group]"
+    exit 
+end
+
+def parse_opt(args)
+    options = {}
+    OptionParser.new do |opts|
+        opts.separator ""
+
+        opts.on("-r", "--rabbitmq rabbitmq_server", "rabbitmq server ip") do |r|
+            options[:rabbitmq_server] = r
+        end 
+
+        opts.on("-c", "--control control", "specify control action") do |cmd|
+            options[:control] = cmd
+        end
+
+        opts.on("-g", "--group group", "group name") do |g|
+            options[:group] = g
+        end 
+
+        opts.on("-n", "--newgroup new_g", "new group name") do |g|
+            options[:new_g] = g
+        end 
+
+        opts.on("-h", "--help", "show help info") do
+            show_helper
+        end
+
+    end.parse!(args)
+    options
+end
+options = parse_opt(ARGV)
+show_helper if options[:group].nil? || options[:control].nil?
+rabbitmq_server = options[:rabbitmq_server] || "127.0.0.1"
+group = options[:group]
+operation = options[:control]
+puts ">>>you operation: #{operation} group: #{group}"
+@mgr = Beacon::MiddleRest.new(rabbitmq_server)
+case operation
+when 'del', 'delete'
+    puts  @mgr.del_group(group)
+when 'add', 'create'
+    puts @mgr.add_group(group)
+when 'mv', 'move'
+when 'rename'
+    new_group = options[:new_g]
+    show_helper if  new_group.nil?
+    puts @mgr.rename_group(group, new_group)
+end

@@ -1,0 +1,277 @@
+#!/usr/local/bin/ruby
+require 'beacon'
+require 'json'
+require 'test/unit'
+require 'roadbike'
+
+if ARGV.nil? or ARGV.empty?
+    puts "usage: beacon_test nic_name| beacon_test eth0"
+    exit(1)
+end
+nic_name = ARGV[0]
+ARGV.clear
+LOCAL_IP = Beacon::SystemInfo.get_netcard_ip(nic_name)
+if LOCAL_IP.empty?
+    puts "nic name error, not find ip"
+    exit(1)
+end
+puts "-------------------"
+puts "test on nic #{nic_name} with ip #{LOCAL_IP}"
+puts "-------------------"
+
+def get_pid(name)
+    `ps axu|grep -v grep|grep #{name}|awk '{print $2}'`
+end
+rabbit_id = get_pid("rabbitmq_server")
+grid_id = get_pid("beacon:GRIDService")
+dumb_id = get_pid("beacon:Dumb")
+system_id = get_pid("beacon:SystemInfo")
+if rabbit_id.nil? || rabbit_id.empty?
+    p "rabbitmq server not run, start it use command: rabbitmq-server -detached" 
+    exit(1)
+end
+if grid_id.nil? || grid_id.empty?
+    p "beacon:GRIDService not run, start it use command: beacon -c /root/beacon/conf/beacon.conf"
+    exit(1)
+end
+if dumb_id.nil? || dumb_id.empty?
+    p "beacon:Dumb not run, start it use command: beacon -c /root/beacon/conf/beacon.conf -s Dumb"
+    exit(1)
+end
+if system_id.nil? || system_id.empty?
+    p "beacon:SystemInfo not run, start it use command: beacon -c /root/beacon/conf/beacon.conf -s SystemInfo"
+    exit(1)
+end
+TEST_NUM = 10
+class GroupTest < Test::Unit::TestCase
+    extend RB::UnitTestHelper
+
+    def setup
+        @tt = Beacon::MiddleRest.new
+    end
+
+    def teardown
+        puts ">>>one test case over, run next"
+    end
+
+    def test_group_create_and_delete
+        TEST_NUM.times {|i|
+            group = "testgroup" + i.to_s
+            @tt.add_group(group)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(2, result.length)
+            assert_raise Beacon::MiddleRestException do
+                @tt.add_group(group)
+            end
+
+            @tt.del_group!(group)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(1, result.length)
+            assert_equal("default", result[0]["id"])
+
+            assert_raise Beacon::MiddleRestException do
+                @tt.del_group!(group)
+            end
+        }
+    end
+
+    def test_group_move
+        @asyn_uuids = []
+        TEST_NUM.times {|i|
+            group = "testgroup" + i.to_s
+            @tt.add_group(group)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(2, result.length)
+            result = @tt.get_nodes(true)
+            assert(result.include?("cpu_usage"))
+            result = @tt.get_nodes(false)
+            assert(!result.include?("cpu_usage"))
+
+            assert_raise Beacon::MiddleRestException do
+               @tt.add_group(group)
+            end
+
+            @tt.add_node(group, LOCAL_IP)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(2, result.length)
+            assert_equal("default", result[0]["id"])
+            assert_equal(group, result[1]["id"])
+            assert_equal(LOCAL_IP, result[1]["members"][0]["id"])
+
+            assert_raise Beacon::MiddleRestException do
+                @tt.add_node(group, LOCAL_IP)
+            end
+
+            result = @tt.send_cmd_to_node("max", [10, 20], group, LOCAL_IP, "Dumb") #info was function result 
+            result = JSON.load(result)
+            assert_equal("20", result["info"].to_s)
+            assert_equal(LOCAL_IP, result["_ip"].to_s)
+
+            result = @tt.send_cmd_to_group("max", [10, 20], group, "Dumb", 0) #asyn
+            result = JSON.load(result)
+            @asyn_uuids << result["id"]
+
+            json =  [{"foo"=>"bar", "zdns" => ["maple", "zlope"]}, {"hello" => "world", "knet" => ["gtld"]}]
+            r = @tt.send_cmd_to_node("pj", json, group, LOCAL_IP, "Dumb")
+            response = JSON.load(r)
+            assert_equal(response["info"].class, Hash)
+            assert_equal(response["info"]["foo"], "bar")
+            assert_equal(response["info"]["zdns"], ["maple", "zlope"])
+            assert_equal(response["info"]["hello"], "world")
+            assert_equal(response["info"]["knet"], ["gtld"])
+
+            r = @tt.send_cmd_to_node("hw", [], group, LOCAL_IP, 'Dumb')
+            response = JSON.load(r)
+            assert_equal(response["info"], "hello world")
+
+            para = ["this is a echo information, thanks!!!"]
+            r = @tt.send_cmd_to_node("echo", para, group, LOCAL_IP, "Dumb")
+            response = JSON.load(r)
+            assert_equal(response["info"], para[0])
+
+
+
+            result = @tt.send_cmd_to_node("max", [10, 20], group, "*", "Dumb") #info was function result 
+            result = JSON.load(result)
+            assert_equal("20", result[0]["info"].to_s)
+            outs = `rabbitmqctl list_exchanges`
+            assert(outs.include?(group))
+
+            @tt.del_group(group)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(1, result.length)
+            assert_equal("default", result[0]["id"])
+            assert_equal(LOCAL_IP, result[0]["members"][0]["id"])
+
+        }
+
+        sleep 1
+        @asyn_uuids.each {|id|
+          response =  JSON.load(@tt.get_asyn_result(id))
+          assert_equal("20", response[0]["info"].to_s)
+        }
+    end
+    def test_group_rename
+        group = "testgroup0"
+        @tt.add_group(group)
+        result = JSON.load(@tt.get_nodes)
+        assert_equal(2, result.length)
+
+        @tt.add_node(group, LOCAL_IP)
+        result = JSON.load(@tt.get_nodes)
+        assert_equal(2, result.length)
+        assert_equal("default", result[0]["id"])
+        assert_equal(group, result[1]["id"])
+
+        assert_raise Beacon::MiddleRestException do
+            @tt.add_node(group, LOCAL_IP)
+        end
+
+        TEST_NUM.times {|i|
+            old_group = "testgroup" + i.to_s
+            new_group = "testgroup" + (i+1).to_s
+            @tt.rename_group(old_group, new_group)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(2, result.length)
+            assert_equal("default", result[0]["id"])
+            assert_equal(new_group, result[1]["id"])
+            assert_equal(LOCAL_IP, result[1]["members"][0]["id"])
+
+            result = @tt.send_cmd_to_node("max", [10, 20], new_group, LOCAL_IP, "Dumb") #info was function result 
+            result = JSON.load(result)
+            assert_equal("20", result["info"].to_s)
+
+            result = @tt.send_cmd_to_node("max", [10, 20], new_group, "*", "Dumb") #info was function result 
+            result = JSON.load(result)
+            assert_equal("20", result[0]["info"].to_s)
+
+            outs = `rabbitmqctl list_exchanges`
+            assert(outs.include?(new_group))
+            group = new_group
+        }
+        @tt.del_group(group)
+        result = JSON.load(@tt.get_nodes)
+        assert_equal(1, result.length)
+        assert_equal("default", result[0]["id"])
+        assert_equal(LOCAL_IP, result[0]["members"][0]["id"])
+    end
+
+    def test_update_group_member
+        TEST_NUM.times {|i|
+            new_member_id = "update_member" + i.to_s
+            new_group_id = "group_for_update" + i.to_s
+            new_new_member_id = "newest_member" + i.to_s
+            @tt.update_group_member("default", LOCAL_IP,  "default", new_member_id)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(1, result.length)
+            assert_equal(result[0]["members"][0]["id"], new_member_id)
+
+            result = @tt.send_cmd_to_node("max", [10, 20], "default", new_member_id, "Dumb") 
+            result = JSON.load(result)
+            assert_equal("20", result["info"].to_s)
+
+            @tt.add_group(new_group_id)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(2, result.length)
+            assert_raise Beacon::MiddleRestException do
+                @tt.add_group(new_group_id)
+            end
+
+            @tt.update_group_member("default",  new_member_id, new_group_id, new_new_member_id)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(2, result.length)
+            assert_equal(result[1]["members"][0]["id"], new_new_member_id)
+
+            result = @tt.send_cmd_to_node("max", [10, 20], new_group_id, new_new_member_id, "Dumb") 
+            result = JSON.load(result)
+            assert_equal("20", result["info"].to_s)
+
+
+            assert_raise Beacon::MiddleRestException do
+               @tt.update_group_member("default",  new_member_id, new_group_id, new_new_member_id)
+            end
+
+            @tt.del_group(new_group_id)
+        }
+
+        last_name = "newest_member" + (TEST_NUM-1).to_s
+        @tt.update_group_member("default",  last_name, "default", LOCAL_IP)
+    end
+
+    def test_delete_group_member
+        TEST_NUM.times {|i|
+            @tt.delete_group_member("default",  LOCAL_IP)
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(0, result[0]["members"].length)
+            @tt.insert_group_member("default", LOCAL_IP, ["Dumb","SystemInfo"])
+            result = JSON.load(@tt.get_nodes)
+            assert_equal(1, result[0]["members"].length)
+            assert_equal(LOCAL_IP, result[0]["members"][0]['id'])
+            assert_equal(2, result[0]["members"][0]["services"].length)
+        }
+    end
+
+    def test_queue_purge_and_clear
+        count = `curl --silent http://localhost:5678/operation/count/members/#{LOCAL_IP}/services/Dumb`
+        assert(count.to_i >= 0)
+        result = `curl -X POST --silent http://localhost:5678/operation/purge/members/#{LOCAL_IP}/services/Dumb`
+        assert(result.include?("Bunny::Queue"))
+    end
+
+    def test_delete_service
+        `curl -X DELETE --silent http://localhost:5678/groups/default/members/#{LOCAL_IP}/services/Dumb`
+        bindings = `rabbitmqctl list_bindings`
+        assert(!bindings.include?("#.Dumb"))
+        require 'sqlite3'
+        db = SQLite3::Database.new("/usr/local/beacon/db/grid.db")
+        values = db.execute("select * from member").map do |t|
+            [t[3]]
+        end
+        db.close
+        assert(!values[0].include?("Dumb"))
+        pid = fork do
+        `beacon -c /root/beacon/conf/beacon.conf -s Dumb`
+        end
+        Process.detach(pid)
+    end
+end

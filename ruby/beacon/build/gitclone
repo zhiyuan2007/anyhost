@@ -1,0 +1,12 @@
+#!/bin/bash
+gitname=$1
+expect <<EOF
+set timeout 120
+spawn git clone ssh://guest@202.173.9.24/var/zddi/git/$gitname.git
+expect "guest@202.173.9.24's password:"
+send "guest\r"
+expect "$gitname"
+spawn mv $gitname temp_3rd-party
+expect eof
+EOF
+mv temp_3rd-party $gitname

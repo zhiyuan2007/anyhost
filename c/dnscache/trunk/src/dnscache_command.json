@@ -1,0 +1,86 @@
+{
+    "command_specs": 
+    [
+        {
+            "command_name": "add_ip_wblist",
+            "command_description": "add ip white list",
+            "command_args": 
+            [ 
+                {
+                    "item_name": "ip_mask",
+                    "item_type": "string",
+                    "item_optional": "false",
+                    "item_default": ""
+                }
+            ]
+        },
+        {
+            "command_name": "del_ip_wblist",
+            "command_description": "delete ip white list",
+            "command_args": 
+            [ 
+                {
+                    "item_name": "ip_mask",
+                    "item_type": "string",
+                    "item_optional": "false",
+                    "item_default": ""
+                }
+            ]
+        },
+        {
+            "command_name": "add_domain_wblist",
+            "command_description": "add domain white list",
+            "command_args": 
+            [ 
+                {
+                    "item_name": "domain_name",
+                    "item_type": "string",
+                    "item_optional": "false",
+                    "item_default": ""
+                }
+            ]
+        },
+        {
+            "command_name": "del_domain_wblist",
+            "command_description": "delete domain white list",
+            "command_args": 
+            [ 
+                {
+                    "item_name": "domain_name",
+                    "item_type": "string",
+                    "item_optional": "false",
+                    "item_default": ""
+                }
+            ]
+        },
+        {
+            "command_name": "set_pattern",
+            "command_description": "set dns cache pattern",
+            "command_args": 
+            [ 
+                {
+                    "item_name": "pattern",
+                    "item_type": "string",
+                    "item_optional": "True",
+                    "item_default": "write"
+                }
+            ]
+        },
+        {
+            "command_name": "set_capacity",
+            "command_description": "set cache capacity",
+            "command_args": 
+            [ 
+                {
+                    "item_name": "capacity",
+                    "item_type": "integer",
+                    "item_optional": "True",
+                    "item_default": "10485760"
+                }
+            ]
+        }
+
+
+   ]
+}
+ 

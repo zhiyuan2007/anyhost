@@ -1,0 +1,502 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ACLOCAL	Makefile	/^ACLOCAL = ${SHELL} \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo\/missing --run aclocal-1.11$/;"	m
+ACLOCAL_M4	Makefile	/^ACLOCAL_M4 = $(top_srcdir)\/aclocal.m4$/;"	m
+ADATAUNIT	zip_memory_pool.c	8;"	d	file:
+ADDR_IPV4	zip_addr.h	/^typedef enum {ADDR_IPV4, ADDR_IPV6} addr_type_t;$/;"	e	enum:__anon4
+ADDR_IPV6	zip_addr.h	/^typedef enum {ADDR_IPV4, ADDR_IPV6} addr_type_t;$/;"	e	enum:__anon4
+ALIGNMENT	zip_memory_pool.c	9;"	d	file:
+ALIGN_PAD	dig_mem_pool.c	18;"	d	file:
+AMTAR	Makefile	/^AMTAR = ${SHELL} \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo\/missing --run tar$/;"	m
+AM_CPPFLAGS	Makefile	/^AM_CPPFLAGS = -I\/usr\/include\/glib-2.0 -I\/usr\/lib\/i386-linux-gnu\/glib-2.0\/include   -I\/usr\/local\/include   -L$(RUBY_LIB_PATH)$/;"	m
+AR	Makefile	/^AR = ar$/;"	m
+ASSERT	zip_utils.h	45;"	d
+ATOMIC_INIT	dig_atomic.h	17;"	d
+AUTOCONF	Makefile	/^AUTOCONF = ${SHELL} \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo\/missing --run autoconf$/;"	m
+AUTOHEADER	Makefile	/^AUTOHEADER = ${SHELL} \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo\/missing --run autoheader$/;"	m
+AUTOMAKE	Makefile	/^AUTOMAKE = ${SHELL} \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo\/missing --run automake-1.11$/;"	m
+AWK	Makefile	/^AWK = mawk$/;"	m
+BLACK	dig_rb_tree.c	7;"	d	file:
+CC	Makefile	/^CC = gcc$/;"	m
+CCDEPMODE	Makefile	/^CCDEPMODE = depmode=gcc3$/;"	m
+CCLD	Makefile	/^CCLD = $(CC)$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -g -O2$/;"	m
+CHECK	zip_utils.h	19;"	d
+COMPILE	Makefile	/^COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \\$/;"	m
+CONFIG_CLEAN_FILES	Makefile	/^CONFIG_CLEAN_FILES =$/;"	m
+CONFIG_CLEAN_VPATH_FILES	Makefile	/^CONFIG_CLEAN_VPATH_FILES =$/;"	m
+CONFIG_HEADER	Makefile	/^CONFIG_HEADER = $(top_builddir)\/config.h$/;"	m
+CPP	Makefile	/^CPP = gcc -E$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS = $/;"	m
+CTAGS	Makefile	/^CTAGS = ctags$/;"	m
+CYGPATH_W	Makefile	/^CYGPATH_W = echo$/;"	m
+DEFAULE_QUEUE_SIZE	dynamic_queue.c	14;"	d	file:
+DEFAULT_ELEM_COUNT	dig_mem_pool.c	16;"	d	file:
+DEFAULT_INCLUDES	Makefile	/^DEFAULT_INCLUDES = -I. -I$(top_builddir)$/;"	m
+DEFAULT_MEM_GROW_SIZE	zip_memory_pool.c	11;"	d	file:
+DEFAULT_MEM_INIT_SIZE	zip_memory_pool.c	10;"	d	file:
+DEFS	Makefile	/^DEFS = -DHAVE_CONFIG_H$/;"	m
+DEPDIR	Makefile	/^DEPDIR = .deps$/;"	m
+DIG_ADDR_H	zip_addr.h	2;"	d
+DIG_CALLOC	zip_utils.h	39;"	d
+DIG_MALLOC	zip_utils.h	29;"	d
+DIG_REALLOC	zip_utils.h	34;"	d
+DIG_RING_H	dig_ring.h	2;"	d
+DIG_SERVER_H	zip_dns_server.h	2;"	d
+DIG_SOCKET_H	zip_socket.h	2;"	d
+DISTFILES	Makefile	/^DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)$/;"	m
+DIST_COMMON	Makefile	/^DIST_COMMON = $(srcdir)\/Makefile.am $(srcdir)\/Makefile.in$/;"	m
+DIST_SOURCES	Makefile	/^DIST_SOURCES = $(dns_cache_SOURCES)$/;"	m
+DONE	dig_thread_pool.c	/^    DONE$/;"	e	enum:__anon2	file:
+DSYMUTIL	Makefile	/^DSYMUTIL = $/;"	m
+DUMPBIN	Makefile	/^DUMPBIN = $/;"	m
+DYNALNKQUEUE_H	dynamic_queue.h	7;"	d
+ECHO_C	Makefile	/^ECHO_C = $/;"	m
+ECHO_N	Makefile	/^ECHO_N = -n$/;"	m
+ECHO_T	Makefile	/^ECHO_T = $/;"	m
+EGREP	Makefile	/^EGREP = \/bin\/grep -E$/;"	m
+ETAGS	Makefile	/^ETAGS = etags$/;"	m
+EVENT_CFLAGS	Makefile	/^EVENT_CFLAGS = -I\/usr\/local\/include  $/;"	m
+EVENT_LIBS	Makefile	/^EVENT_LIBS = -L\/usr\/local\/lib -levent  $/;"	m
+EXEEXT	Makefile	/^EXEEXT = $/;"	m
+FGREP	Makefile	/^FGREP = \/bin\/grep -F$/;"	m
+GLIB_CFLAGS	Makefile	/^GLIB_CFLAGS = -I\/usr\/include\/glib-2.0 -I\/usr\/lib\/i386-linux-gnu\/glib-2.0\/include  $/;"	m
+GLIB_LIBS	Makefile	/^GLIB_LIBS = -L\/usr\/lib\/i386-linux-gnu -lglib-2.0  $/;"	m
+GREP	Makefile	/^GREP = \/bin\/grep$/;"	m
+IDLE	dig_thread_pool.c	/^    IDLE,$/;"	e	enum:__anon2	file:
+INIT_MEM_SIZE	zip_dns_server.c	10;"	d	file:
+INSTALL	Makefile	/^INSTALL = \/usr\/bin\/install -c$/;"	m
+INSTALL_DATA	Makefile	/^INSTALL_DATA = ${INSTALL} -m 644$/;"	m
+INSTALL_HEADER	Makefile	/^INSTALL_HEADER = $(INSTALL_DATA)$/;"	m
+INSTALL_PROGRAM	Makefile	/^INSTALL_PROGRAM = ${INSTALL}$/;"	m
+INSTALL_SCRIPT	Makefile	/^INSTALL_SCRIPT = ${INSTALL}$/;"	m
+INSTALL_STRIP_PROGRAM	Makefile	/^INSTALL_STRIP_PROGRAM = $(install_sh) -c -s$/;"	m
+LD	Makefile	/^LD = \/usr\/bin\/ld$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS = $/;"	m
+LIBOBJS	Makefile	/^LIBOBJS = $/;"	m
+LIBS	Makefile	/^LIBS = $/;"	m
+LIBTOOL	Makefile	/^LIBTOOL = $(SHELL) $(top_builddir)\/libtool$/;"	m
+LINK	Makefile	/^LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \\$/;"	m
+LIPO	Makefile	/^LIPO = $/;"	m
+LN_S	Makefile	/^LN_S = ln -s$/;"	m
+LTCOMPILE	Makefile	/^LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \\$/;"	m
+LTLIBOBJS	Makefile	/^LTLIBOBJS = $/;"	m
+MAKEINFO	Makefile	/^MAKEINFO = ${SHELL} \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo\/missing --run makeinfo$/;"	m
+MAX	zip_utils.h	16;"	d
+MAX_DOMAIN_NAME_LEN	zip_dns_lib.h	6;"	d
+MAX_IP_STR_LEN	zip_addr.h	10;"	d
+MAX_LABEL_LEN	zip_dns_lib.h	7;"	d
+MAX_QUERY_BUF_LEN	dns_cache.c	24;"	d	file:
+MEMORY_POOL_H	zip_memory_pool.h	8;"	d
+MEM_POOL_H	dig_mem_pool.h	2;"	d
+MIN	zip_utils.h	17;"	d
+MKDIR_P	Makefile	/^MKDIR_P = \/bin\/mkdir -p$/;"	m
+NM	Makefile	/^NM = \/usr\/bin\/nm -B$/;"	m
+NMEDIT	Makefile	/^NMEDIT = $/;"	m
+NORMAL_INSTALL	Makefile	/^NORMAL_INSTALL = :$/;"	m
+NORMAL_UNINSTALL	Makefile	/^NORMAL_UNINSTALL = :$/;"	m
+OBJDUMP	Makefile	/^OBJDUMP = objdump$/;"	m
+OBJEXT	Makefile	/^OBJEXT = o$/;"	m
+OPCODE_MASK	zip_dns_lib.c	35;"	d	file:
+OTOOL	Makefile	/^OTOOL = $/;"	m
+OTOOL64	Makefile	/^OTOOL64 = $/;"	m
+PACKAGE	Makefile	/^PACKAGE = dns_cache$/;"	m
+PACKAGE_BUGREPORT	Makefile	/^PACKAGE_BUGREPORT = $/;"	m
+PACKAGE_NAME	Makefile	/^PACKAGE_NAME = dns_cache$/;"	m
+PACKAGE_STRING	Makefile	/^PACKAGE_STRING = dns_cache 0.1$/;"	m
+PACKAGE_TARNAME	Makefile	/^PACKAGE_TARNAME = dns_cache$/;"	m
+PACKAGE_URL	Makefile	/^PACKAGE_URL = $/;"	m
+PACKAGE_VERSION	Makefile	/^PACKAGE_VERSION = 0.1$/;"	m
+PATH_MAX	dns_cache.c	28;"	d	file:
+PATH_SEPARATOR	Makefile	/^PATH_SEPARATOR = :$/;"	m
+PKG_CONFIG	Makefile	/^PKG_CONFIG = \/usr\/bin\/pkg-config$/;"	m
+PKG_CONFIG_LIBDIR	Makefile	/^PKG_CONFIG_LIBDIR = $/;"	m
+PKG_CONFIG_PATH	Makefile	/^PKG_CONFIG_PATH = $/;"	m
+POST_INSTALL	Makefile	/^POST_INSTALL = :$/;"	m
+POST_UNINSTALL	Makefile	/^POST_UNINSTALL = :$/;"	m
+PRE_INSTALL	Makefile	/^PRE_INSTALL = :$/;"	m
+PRE_UNINSTALL	Makefile	/^PRE_UNINSTALL = :$/;"	m
+PROGRAMS	Makefile	/^PROGRAMS = $(bin_PROGRAMS)$/;"	m
+QUERY_INVERSE	zip_dns_lib.h	/^    QUERY_INVERSE = 0x0800,   \/\/< 1: Inverse query (RFC1035)$/;"	e	enum:__anon3
+QUERY_NOTIFY	zip_dns_lib.h	/^    QUERY_NOTIFY  = 0x2000,   \/\/< 4: Notify (RFC1996)$/;"	e	enum:__anon3
+QUERY_STAND	zip_dns_lib.h	/^    QUERY_STAND   = 0x0000,   \/\/< 0: Standard query (RFC1035)$/;"	e	enum:__anon3
+QUERY_STATUS	zip_dns_lib.h	/^    QUERY_STATUS  = 0x1000,   \/\/< 2: Server status request (RFC1035)$/;"	e	enum:__anon3
+QUERY_UPDATE	zip_dns_lib.h	/^    QUERY_UPDATE  = 0x2800    \/\/< 5: Dynamic update (RFC2136)$/;"	e	enum:__anon3
+RANLIB	Makefile	/^RANLIB = ranlib$/;"	m
+RBTREE_FOR	dig_rb_tree.h	71;"	d
+RBTREE_NULL	dig_rb_tree.h	24;"	d
+RBTREE_WALK	dig_rb_tree.h	64;"	d
+RED	dig_rb_tree.c	8;"	d	file:
+RING_CHECK	dig_ring.h	176;"	d
+RING_CHECK	dig_ring.h	206;"	d
+RING_CHECK_ELEM	dig_ring.h	178;"	d
+RING_CHECK_ELEM	dig_ring.h	207;"	d
+RING_CHECK_ONE	dig_ring.h	174;"	d
+RING_CHECK_ONE	dig_ring.h	205;"	d
+RING_CONCAT	dig_ring.h	136;"	d
+RING_ELEM_INIT	dig_ring.h	87;"	d
+RING_EMPTY	dig_ring.h	84;"	d
+RING_ENTRY	dig_ring.h	27;"	d
+RING_FIRST	dig_ring.h	71;"	d
+RING_FOREACH	dig_ring.h	162;"	d
+RING_FOREACH_REVERSE	dig_ring.h	167;"	d
+RING_HEAD	dig_ring.h	45;"	d
+RING_INIT	dig_ring.h	79;"	d
+RING_INSERT_AFTER	dig_ring.h	112;"	d
+RING_INSERT_BEFORE	dig_ring.h	109;"	d
+RING_INSERT_HEAD	dig_ring.h	127;"	d
+RING_INSERT_TAIL	dig_ring.h	130;"	d
+RING_LAST	dig_ring.h	72;"	d
+RING_NEXT	dig_ring.h	73;"	d
+RING_PREV	dig_ring.h	74;"	d
+RING_REMOVE	dig_ring.h	156;"	d
+RING_SENTINEL	dig_ring.h	63;"	d
+RING_SPLICE_AFTER	dig_ring.h	102;"	d
+RING_SPLICE_BEFORE	dig_ring.h	95;"	d
+RING_SPLICE_HEAD	dig_ring.h	119;"	d
+RING_SPLICE_TAIL	dig_ring.h	123;"	d
+RING_UNSPLICE	dig_ring.h	149;"	d
+RUNNING	dig_thread_pool.c	/^    RUNNING,$/;"	e	enum:__anon2	file:
+SED	Makefile	/^SED = \/bin\/sed$/;"	m
+SET_MAKE	Makefile	/^SET_MAKE = $/;"	m
+SHELL	Makefile	/^SHELL = \/bin\/bash$/;"	m
+SOCKET_FAMILY	zip_socket.h	14;"	d
+SOCKET_FD	zip_socket.h	12;"	d
+SOCKET_PEER_ADDR	zip_socket.h	15;"	d
+SOCKET_TYPE	zip_socket.h	13;"	d
+SOURCES	Makefile	/^SOURCES = $(dns_cache_SOURCES)$/;"	m
+STRIP	Makefile	/^STRIP = strip$/;"	m
+TASK_POOL_SIZE	dig_thread_pool.c	50;"	d	file:
+TCP_MAX_PACKAGE_LEN	zip_dns_server.c	9;"	d	file:
+TCP_SERVER	zip_dns_server.h	/^    TCP_SERVER$/;"	e	enum:__anon1
+THREAD_POOL_H	dig_thread_pool.h	2;"	d
+UDP_MAX_PACKAGE_LEN	zip_dns_server.h	10;"	d
+UDP_SERVER	zip_dns_server.h	/^    UDP_SERVER,$/;"	e	enum:__anon1
+VERSION	Makefile	/^VERSION = 0.1$/;"	m
+ZIP_DNS_LIB_	zip_dns_lib.h	2;"	d
+_ATOMIC_H	dig_atomic.h	2;"	d
+_DIG_UTIL_H_	zip_utils.h	2;"	d
+_H_DIG_RBTREE_H_	dig_rb_tree.h	2;"	d
+_addr	zip_addr.h	/^typedef struct _addr$/;"	s
+_node	dig_rb_tree.h	/^	rbnode_t    *_node;$/;"	m	struct:rbtree_t
+abs_builddir	Makefile	/^abs_builddir = \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo\/src_fork$/;"	m
+abs_srcdir	Makefile	/^abs_srcdir = \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo\/src_fork$/;"	m
+abs_top_builddir	Makefile	/^abs_top_builddir = \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo$/;"	m
+abs_top_srcdir	Makefile	/^abs_top_srcdir = \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo$/;"	m
+ac_ct_CC	Makefile	/^ac_ct_CC = gcc$/;"	m
+ac_ct_DUMPBIN	Makefile	/^ac_ct_DUMPBIN = $/;"	m
+adata	zip_memory_pool.c	/^    char                adata[1];$/;"	m	struct:mem_block	file:
+add_task_to_thread	dig_thread_pool.c	/^add_task_to_thread(thread_t *t, task_func_t func, void *task_param)$/;"	f	file:
+addr_compare	zip_addr.c	/^addr_compare(const addr_t *src, const addr_t *dst)$/;"	f
+addr_from_sockaddr	zip_addr.c	/^addr_from_sockaddr(addr_t *addr, struct sockaddr *sock_addr, int socklen)$/;"	f
+addr_get_ip	zip_addr.c	/^addr_get_ip(const addr_t *addr, char *ip)$/;"	f
+addr_get_mask	zip_addr.c	/^addr_get_mask(const addr_t *addr)$/;"	f
+addr_get_port	zip_addr.c	/^addr_get_port(const addr_t *addr)$/;"	f
+addr_get_socklen	zip_addr.c	/^addr_get_socklen(const addr_t *addr)$/;"	f
+addr_get_type	zip_addr.c	/^addr_get_type(const addr_t *addr)$/;"	f
+addr_get_v4_addr	zip_addr.c	/^addr_get_v4_addr(const addr_t *addr)$/;"	f
+addr_init	zip_addr.c	/^addr_init(addr_t *addr, const char *ip, uint16_t port)$/;"	f
+addr_is_in_same_network	zip_addr.c	/^addr_is_in_same_network(const addr_t *addr1, const addr_t *addr2)$/;"	f
+addr_is_loopback	zip_addr.c	/^addr_is_loopback(const addr_t *addr)$/;"	f
+addr_set_mask	zip_addr.c	/^addr_set_mask(addr_t *addr, int mask)$/;"	f
+addr_set_port	zip_addr.c	/^addr_set_port(addr_t *addr, uint16_t port)$/;"	f
+addr_t	zip_addr.h	/^}addr_t;$/;"	t	typeref:struct:_addr
+addr_to_sockaddr	zip_addr.c	/^addr_to_sockaddr(const addr_t *addr)$/;"	f
+addr_type	zip_addr.h	/^    addr_type_t addr_type;$/;"	m	struct:_addr
+addr_type_t	zip_addr.h	/^typedef enum {ADDR_IPV4, ADDR_IPV6} addr_type_t;$/;"	t	typeref:enum:__anon4
+addr_v4	zip_addr.h	/^        struct sockaddr_in addr_v4;$/;"	m	union:_addr::__anon5	typeref:struct:_addr::__anon5::sockaddr_in
+addr_v6	zip_addr.h	/^        struct sockaddr_in6 addr_v6;$/;"	m	union:_addr::__anon5	typeref:struct:_addr::__anon5::sockaddr_in6
+am__aclocal_m4_deps	Makefile	/^am__aclocal_m4_deps = $(top_srcdir)\/configure.ac$/;"	m
+am__cd	Makefile	/^am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd$/;"	m
+am__configure_deps	Makefile	/^am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \\$/;"	m
+am__depfiles_maybe	Makefile	/^am__depfiles_maybe = depfiles$/;"	m
+am__include	Makefile	/^am__include = include$/;"	m
+am__installdirs	Makefile	/^am__installdirs = "$(DESTDIR)$(bindir)"$/;"	m
+am__leading_dot	Makefile	/^am__leading_dot = .$/;"	m
+am__mv	Makefile	/^am__mv = mv -f$/;"	m
+am__quote	Makefile	/^am__quote = $/;"	m
+am__tar	Makefile	/^am__tar = ${AMTAR} chof - "$$tardir"$/;"	m
+am__untar	Makefile	/^am__untar = ${AMTAR} xf -$/;"	m
+am_dns_cache_OBJECTS	Makefile	/^am_dns_cache_OBJECTS = dns_cache.$(OBJEXT) zip_dns_lib.$(OBJEXT) \\$/;"	m
+atomic	dynamic_queue.h	/^    atomic_t atomic;$/;"	m	struct:__anon6
+atomic_add	dig_atomic.h	/^static inline int atomic_add( int i, atomic_t *v )$/;"	f
+atomic_add_negative	dig_atomic.h	/^static inline int atomic_add_negative( int i, atomic_t *v )$/;"	f
+atomic_cas	dig_atomic.h	/^static inline int atomic_cas( atomic_t *v, int oldval, int newval )$/;"	f
+atomic_dec	dig_atomic.h	/^static inline int atomic_dec( atomic_t *v )$/;"	f
+atomic_dec_and_test	dig_atomic.h	/^static inline bool atomic_dec_and_test( atomic_t *v )$/;"	f
+atomic_inc	dig_atomic.h	/^static inline int atomic_inc( atomic_t *v )$/;"	f
+atomic_inc_and_test	dig_atomic.h	/^static inline bool atomic_inc_and_test( atomic_t *v )$/;"	f
+atomic_read	dig_atomic.h	25;"	d
+atomic_set	dig_atomic.h	32;"	d
+atomic_sub	dig_atomic.h	/^static inline int atomic_sub( int i, atomic_t *v )$/;"	f
+atomic_sub_and_test	dig_atomic.h	/^static inline bool atomic_sub_and_test( int i, atomic_t *v )$/;"	f
+atomic_t	dig_atomic.h	/^} atomic_t;$/;"	t	typeref:struct:__anon7
+base_event_	dns_cache.c	/^    struct event_base *base_event_;$/;"	m	struct:dnscache	typeref:struct:dnscache::event_base	file:
+base_event_	zip_dns_server.c	/^    struct event_base *base_event_;$/;"	m	struct:dns_udp_server	typeref:struct:dns_udp_server::event_base	file:
+bin_PROGRAMS	Makefile	/^bin_PROGRAMS = dns_cache$(EXEEXT)$/;"	m
+bindir	Makefile	/^bindir = ${exec_prefix}\/bin$/;"	m
+block	zip_memory_pool.c	/^    mem_block_t*     block;$/;"	m	struct:mem_pool	file:
+block_delete	zip_memory_pool.c	/^block_delete(mem_block_t *block)$/;"	f	file:
+block_new	zip_memory_pool.c	/^block_new(uint32_t number, uint32_t unit_size)$/;"	f
+build	Makefile	/^build = i686-pc-linux-gnu$/;"	m
+build_alias	Makefile	/^build_alias = $/;"	m
+build_cpu	Makefile	/^build_cpu = i686$/;"	m
+build_os	Makefile	/^build_os = linux-gnu$/;"	m
+build_triplet	Makefile	/^build_triplet = i686-pc-linux-gnu$/;"	m
+build_vendor	Makefile	/^build_vendor = pc$/;"	m
+builddir	Makefile	/^builddir = .$/;"	m
+change_child_ptr	dig_rb_tree.c	/^static void change_child_ptr(rbnode_t* child, rbnode_t* old, rbnode_t* new)$/;"	f	file:
+change_parent_ptr	dig_rb_tree.c	/^static void change_parent_ptr(rbtree_t* rbtree, rbnode_t* parent, rbnode_t* old, rbnode_t* new)$/;"	f	file:
+client_addr	zip_dns_server.h	/^    addr_t client_addr;$/;"	m	struct:query_session
+client_socket	zip_dns_server.h	/^    socket_t client_socket;$/;"	m	struct:query_session
+cmp	dig_rb_tree.h	/^	int (*cmp) (const void *, const void *);$/;"	m	struct:rbtree_t
+color	dig_rb_tree.h	/^	uint8_t	    color;$/;"	m	struct:rbnode_t
+count	dig_rb_tree.h	/^	size_t       count;$/;"	m	struct:rbtree_t
+counter	dig_atomic.h	/^    volatile int counter;$/;"	m	struct:__anon7
+data	dynamic_queue.h	/^    void **data;       \/\/ elem data$/;"	m	struct:__anon6
+data_len	zip_dns_server.h	/^    uint16_t data_len;$/;"	m	struct:query_session
+datadir	Makefile	/^datadir = ${datarootdir}$/;"	m
+datarootdir	Makefile	/^datarootdir = ${prefix}\/share$/;"	m
+depcomp	Makefile	/^depcomp = $(SHELL) $(top_srcdir)\/depcomp$/;"	m
+dns_cache_DEPENDENCIES	Makefile	/^dns_cache_DEPENDENCIES =$/;"	m
+dns_cache_LDADD	Makefile	/^dns_cache_LDADD = -L\/usr\/lib\/i386-linux-gnu -lglib-2.0   -L\/usr\/local\/lib -levent   $(RUBY_LINK_ARG)$/;"	m
+dns_cache_OBJECTS	Makefile	/^dns_cache_OBJECTS = $(am_dns_cache_OBJECTS)$/;"	m
+dns_cache_SOURCES	Makefile	/^dns_cache_SOURCES = dns_cache.c \\$/;"	m
+dns_cache_print_help	dns_cache.c	/^dns_cache_print_help()$/;"	f	file:
+dns_cache_print_version	dns_cache.c	/^dns_cache_print_version(void)$/;"	f	file:
+dns_header_get_opt	zip_dns_lib.c	/^dns_header_get_opt(const uint8_t *header)$/;"	f
+dns_header_set_opt	zip_dns_lib.c	/^dns_header_set_opt(uint8_t *header, opcode_t opcode)$/;"	f
+dns_package_handler_t	zip_dns_server.h	/^typedef void(*dns_package_handler_t)(link_queue_t *queue, void *user_data);$/;"	t
+dns_server	zip_dns_server.c	/^struct dns_server$/;"	s	file:
+dns_server_	dns_cache.c	/^    dns_server_t *dns_server_;$/;"	m	struct:dnscache	file:
+dns_server_create	zip_dns_server.c	/^dns_server_create(struct event_base *base,$/;"	f
+dns_server_delete	zip_dns_server.c	/^dns_server_delete(dns_server_t *server)$/;"	f
+dns_server_start	zip_dns_server.c	/^dns_server_start(dns_server_t *server,$/;"	f
+dns_server_stop	zip_dns_server.c	/^dns_server_stop(dns_server_t *server)$/;"	f
+dns_server_t	zip_dns_server.h	/^typedef struct dns_server dns_server_t;$/;"	t	typeref:struct:dns_server
+dns_udp_server	zip_dns_server.c	/^typedef struct dns_udp_server$/;"	s	file:
+dns_udp_server_create	zip_dns_server.c	/^dns_udp_server_create(struct event_base *base, const char *ip, uint16_t port, uint16_t queue_size)$/;"	f	file:
+dns_udp_server_delete	zip_dns_server.c	/^dns_udp_server_delete(dns_udp_server_t *server)$/;"	f	file:
+dns_udp_server_recv_data_call_back	zip_dns_server.c	/^dns_udp_server_recv_data_call_back(evutil_socket_t fd, short event, void *arg)$/;"	f	file:
+dns_udp_server_start	zip_dns_server.c	/^dns_udp_server_start(dns_udp_server_t *server,$/;"	f	file:
+dns_udp_server_stop	zip_dns_server.c	/^dns_udp_server_stop(dns_udp_server_t *server)$/;"	f	file:
+dns_udp_server_t	zip_dns_server.c	/^}dns_udp_server_t;$/;"	t	typeref:struct:dns_udp_server	file:
+dnscache	dns_cache.c	/^typedef struct dnscache$/;"	s	file:
+dnscache_create	dns_cache.c	/^dnscache_create(char *server_addr,$/;"	f
+dnscache_delete	dns_cache.c	/^dnscache_delete(dnscache_t *dnscache)$/;"	f	file:
+dnscache_init_sig	dns_cache.c	/^dnscache_init_sig(dnscache_t *dnscache)$/;"	f	file:
+dnscache_run	dns_cache.c	/^dnscache_run(dnscache_t *dnscache)$/;"	f	file:
+dnscache_t	dns_cache.c	/^}dnscache_t;$/;"	t	typeref:struct:dnscache	file:
+docdir	Makefile	/^docdir = ${datarootdir}\/doc\/${PACKAGE_TARNAME}$/;"	m
+dqueue_create	dynamic_queue.c	/^dqueue_create()$/;"	f
+dqueue_create_with_size	dynamic_queue.c	/^dqueue_create_with_size(int queue_size)$/;"	f
+dqueue_dequeue	dynamic_queue.c	/^void *dqueue_dequeue(link_queue_t *q)$/;"	f
+dqueue_destroy	dynamic_queue.c	/^void dqueue_destroy(link_queue_t *q)$/;"	f
+dqueue_empty	dynamic_queue.c	/^bool dqueue_empty(link_queue_t *q)$/;"	f
+dqueue_enqueue	dynamic_queue.c	/^bool dqueue_enqueue(link_queue_t *q, void *e)$/;"	f
+dqueue_full	dynamic_queue.c	/^bool dqueue_full(link_queue_t *q)$/;"	f
+dqueue_length	dynamic_queue.c	/^int  dqueue_length(link_queue_t *q)$/;"	f
+dvidir	Makefile	/^dvidir = ${docdir}$/;"	m
+elem_count	dig_mem_pool.c	/^	uint32_t		    elem_count;$/;"	m	struct:mem_pool	file:
+elem_size	dig_mem_pool.c	/^	uint32_t		    elem_size;$/;"	m	struct:mem_pool	file:
+exec_prefix	Makefile	/^exec_prefix = ${prefix}$/;"	m
+family	zip_socket.h	/^    int family;$/;"	m	struct:msocket
+fd	zip_socket.h	/^    int fd;$/;"	m	struct:msocket
+fill_free_list	dig_mem_pool.c	/^fill_free_list(mem_pool_t *mp,  uint8_t *raw_mem, uint32_t elem_count)$/;"	f	file:
+first_index	zip_memory_pool.c	/^    uint32_t            first_index;$/;"	m	struct:mem_block	file:
+force_stop_thread	dig_thread_pool.c	/^static void force_stop_thread(thread_t *t)$/;"	f	file:
+free_list	dig_mem_pool.c	/^	mem_elem_t          *free_list;$/;"	m	struct:mem_pool	file:
+front	dynamic_queue.h	/^    int front;$/;"	m	struct:__anon6
+func	dig_thread_pool.c	/^	task_func_t         func;$/;"	m	struct:task	file:
+get_next_thread_to_run	dig_thread_pool.c	/^get_next_thread_to_run(thread_pool_t *tp)$/;"	f	file:
+grow_new_mem	dig_mem_pool.c	/^grow_new_mem(mem_pool_t *mp, uint32_t new_elem_count)$/;"	f	file:
+grow_size	zip_memory_pool.c	/^    uint32_t         grow_size;$/;"	m	struct:mem_pool	file:
+handle_dns_query	dns_cache.c	/^handle_dns_query(link_queue_t *queue, void *arg)$/;"	f
+handler_	zip_dns_server.c	/^    dns_package_handler_t handler_;$/;"	m	struct:dns_udp_server	file:
+host	Makefile	/^host = i686-pc-linux-gnu$/;"	m
+host_alias	Makefile	/^host_alias = $/;"	m
+host_cpu	Makefile	/^host_cpu = i686$/;"	m
+host_os	Makefile	/^host_os = linux-gnu$/;"	m
+host_triplet	Makefile	/^host_triplet = i686-pc-linux-gnu$/;"	m
+host_vendor	Makefile	/^host_vendor = pc$/;"	m
+htmldir	Makefile	/^htmldir = ${docdir}$/;"	m
+includedir	Makefile	/^includedir = ${prefix}\/include$/;"	m
+infodir	Makefile	/^infodir = ${datarootdir}\/info$/;"	m
+init_block	zip_memory_pool.c	/^init_block(mem_block_t *new_block, uint32_t size, uint32_t unit_size)$/;"	f	file:
+init_size	zip_memory_pool.c	/^    uint32_t         init_size;$/;"	m	struct:mem_pool	file:
+init_thread	dig_thread_pool.c	/^init_thread(thread_pool_t *tp, thread_t *t)$/;"	f	file:
+install_sh	Makefile	/^install_sh = ${SHELL} \/home\/liuguirong\/zdnsserver-zipper-a\/dnscache\/branches\/echo\/install-sh$/;"	m
+install_sh_DATA	Makefile	/^install_sh_DATA = $(install_sh) -c -m 644$/;"	m
+install_sh_PROGRAM	Makefile	/^install_sh_PROGRAM = $(install_sh) -c$/;"	m
+install_sh_SCRIPT	Makefile	/^install_sh_SCRIPT = $(install_sh) -c$/;"	m
+left	dig_rb_tree.h	/^	rbnode_t   *left;$/;"	m	struct:rbnode_t
+left	zip_memory_pool.c	/^    uint32_t            left;$/;"	m	struct:mem_block	file:
+libdir	Makefile	/^libdir = ${exec_prefix}\/lib$/;"	m
+libexecdir	Makefile	/^libexecdir = ${exec_prefix}\/libexec$/;"	m
+link_queue_t	dynamic_queue.h	/^} link_queue_t;$/;"	t	typeref:struct:__anon6
+list_lock	dig_mem_pool.c	/^	pthread_mutex_t 	list_lock;$/;"	m	struct:mem_pool	file:
+localedir	Makefile	/^localedir = ${datarootdir}\/locale$/;"	m
+localstatedir	Makefile	/^localstatedir = ${prefix}\/var$/;"	m
+lt_ECHO	Makefile	/^lt_ECHO = echo$/;"	m
+main	dns_cache.c	/^int main(int argc, char *argv[])$/;"	f
+manager	dig_thread_pool.c	/^	thread_pool_t 		*manager;$/;"	m	struct:thread	file:
+mandir	Makefile	/^mandir = ${datarootdir}\/man$/;"	m
+mask	zip_addr.h	/^    int mask;$/;"	m	struct:_addr
+mem_block	zip_memory_pool.c	/^typedef struct mem_block$/;"	s	file:
+mem_block_t	zip_memory_pool.c	/^}mem_block_t;$/;"	t	typeref:struct:mem_block	file:
+mem_chunk	dig_mem_pool.c	/^typedef struct mem_chunk$/;"	s	file:
+mem_chunk_t	dig_mem_pool.c	/^}mem_chunk_t;$/;"	t	typeref:struct:mem_chunk	file:
+mem_elem	dig_mem_pool.c	/^typedef struct mem_elem$/;"	s	file:
+mem_elem_t	dig_mem_pool.c	/^}mem_elem_t;$/;"	t	typeref:struct:mem_elem	file:
+mem_pool	dig_mem_pool.c	/^struct mem_pool$/;"	s	file:
+mem_pool	dig_thread_pool.c	/^	mem_pool_t		    *mem_pool;$/;"	m	struct:thread	file:
+mem_pool	zip_memory_pool.c	/^struct mem_pool$/;"	s	file:
+mem_pool_alloc	dig_mem_pool.c	/^mem_pool_alloc(mem_pool_t *mp)$/;"	f
+mem_pool_alloc	zip_memory_pool.c	/^mem_pool_alloc(mem_pool_t *mp)$/;"	f
+mem_pool_create	dig_mem_pool.c	/^mem_pool_create(uint32_t elem_size, $/;"	f
+mem_pool_create	zip_memory_pool.c	/^mem_pool_create(uint32_t unit_size, uint32_t init_size, uint32_t grow_size)$/;"	f
+mem_pool_delete	dig_mem_pool.c	/^mem_pool_delete(mem_pool_t *mp)$/;"	f
+mem_pool_delete	zip_memory_pool.c	/^mem_pool_delete(mem_pool_t *mp)$/;"	f
+mem_pool_free	dig_mem_pool.c	/^mem_pool_free(mem_pool_t *mp, void *mem)$/;"	f
+mem_pool_free	zip_memory_pool.c	/^mem_pool_free(mem_pool_t *mp, void *free)$/;"	f
+mem_pool_t	dig_mem_pool.h	/^typedef struct mem_pool mem_pool_t;$/;"	t	typeref:struct:mem_pool
+mem_pool_t	zip_memory_pool.h	/^typedef struct mem_pool mem_pool_t;$/;"	t	typeref:struct:mem_pool
+mkdir_p	Makefile	/^mkdir_p = \/bin\/mkdir -p$/;"	m
+mkey	dig_rb_tree.h	/^	void        *mkey;$/;"	m	struct:rbnode_t
+mkinstalldirs	Makefile	/^mkinstalldirs = $(install_sh) -d$/;"	m
+mp	zip_dns_server.h	/^    mem_pool_t *mp;$/;"	m	struct:query_session
+mp_	zip_dns_server.c	/^    mem_pool_t *mp_;$/;"	m	struct:dns_udp_server	file:
+msocket	zip_socket.h	/^typedef struct msocket {$/;"	s
+needs_auto_grow	dig_mem_pool.c	/^    bool                needs_auto_grow;$/;"	m	struct:mem_pool	file:
+next	dig_mem_pool.c	/^    struct mem_chunk *next;$/;"	m	struct:mem_chunk	typeref:struct:mem_chunk::mem_chunk	file:
+next	dig_mem_pool.c	/^    struct mem_elem *next;$/;"	m	struct:mem_elem	typeref:struct:mem_elem::mem_elem	file:
+next	zip_memory_pool.c	/^    struct mem_block*   next; $/;"	m	struct:mem_block	typeref:struct:mem_block::mem_block	file:
+node_pool	dig_rb_tree.h	/^    mem_pool_t  *node_pool;$/;"	m	struct:rbtree_t
+oldincludedir	Makefile	/^oldincludedir = \/usr\/include$/;"	m
+opcode_t	zip_dns_lib.h	/^} opcode_t;$/;"	t	typeref:enum:__anon3
+param	dig_thread_pool.c	/^    task_param_t        param;$/;"	m	struct:task	file:
+parent	dig_rb_tree.h	/^	rbnode_t   *parent;$/;"	m	struct:rbnode_t
+pdfdir	Makefile	/^pdfdir = ${docdir}$/;"	m
+pkgdatadir	Makefile	/^pkgdatadir = $(datadir)\/dns_cache$/;"	m
+pkgincludedir	Makefile	/^pkgincludedir = $(includedir)\/dns_cache$/;"	m
+pkglibdir	Makefile	/^pkglibdir = $(libdir)\/dns_cache$/;"	m
+pkglibexecdir	Makefile	/^pkglibexecdir = $(libexecdir)\/dns_cache$/;"	m
+prefix	Makefile	/^prefix = \/usr\/local$/;"	m
+program_transform_name	Makefile	/^program_transform_name = s,x,x,$/;"	m
+psdir	Makefile	/^psdir = ${docdir}$/;"	m
+query_pkg_is_valid	zip_dns_server.c	/^query_pkg_is_valid(const char *raw_data, uint16_t data_len)$/;"	f
+query_session	zip_dns_server.h	/^typedef struct query_session$/;"	s
+query_session_t	zip_dns_server.h	/^}query_session_t;$/;"	t	typeref:struct:query_session
+queue_	zip_dns_server.c	/^    link_queue_t *queue_;$/;"	m	struct:dns_udp_server	file:
+queue_size	dns_cache.c	/^static int queue_size = 10;$/;"	v	file:
+queue_size	dynamic_queue.h	/^    int queue_size;        \/\/pre malloc size$/;"	m	struct:__anon6
+raw_data	zip_dns_server.h	/^    uint8_t raw_data[UDP_MAX_PACKAGE_LEN];$/;"	m	struct:query_session
+raw_mem_list	dig_mem_pool.c	/^    mem_chunk_t         *raw_mem_list;$/;"	m	struct:mem_pool	file:
+rb	dig_thread_pool.c	/^	uint32_t		    rb;$/;"	m	struct:thread_pool	file:
+rb_lock	dig_thread_pool.c	/^	pthread_mutex_t		rb_lock;$/;"	m	struct:thread_pool	file:
+rbnode_t	dig_rb_tree.h	/^struct rbnode_t {$/;"	s
+rbnode_t	dig_rb_tree.h	/^typedef struct rbnode_t rbnode_t;$/;"	t	typeref:struct:rbnode_t
+rbtree_create	dig_rb_tree.c	/^rbtree_create (mem_pool_t *node_pool, int (*cmpf)(const void *, const void *))$/;"	f
+rbtree_delete	dig_rb_tree.c	/^rbtree_delete(rbtree_t *rbtree, const void *key)$/;"	f
+rbtree_delete_fixup	dig_rb_tree.c	/^static void rbtree_delete_fixup(rbtree_t* rbtree, rbnode_t* child, rbnode_t* child_parent)$/;"	f	file:
+rbtree_find_less_equal	dig_rb_tree.c	/^rbtree_find_less_equal(rbtree_t *rbtree, const void *key, rbnode_t **result)$/;"	f
+rbtree_first	dig_rb_tree.c	/^rbtree_first (rbtree_t *rbtree)$/;"	f
+rbtree_get_mem_pool	dig_rb_tree.h	/^static inline mem_pool_t *rbtree_get_mem_pool(rbtree_t *rbtree)$/;"	f
+rbtree_insert	dig_rb_tree.c	/^rbtree_insert (rbtree_t *rbtree, rbnode_t *data)$/;"	f
+rbtree_insert_fixup	dig_rb_tree.c	/^rbtree_insert_fixup(rbtree_t *rbtree, rbnode_t *node)$/;"	f	file:
+rbtree_last	dig_rb_tree.c	/^rbtree_last (rbtree_t *rbtree)$/;"	f
+rbtree_next	dig_rb_tree.c	/^rbtree_next (rbnode_t *node)$/;"	f
+rbtree_null_node	dig_rb_tree.c	/^rbnode_t	rbtree_null_node = {$/;"	v
+rbtree_previous	dig_rb_tree.c	/^rbtree_previous(rbnode_t *node)$/;"	f
+rbtree_rotate_left	dig_rb_tree.c	/^rbtree_rotate_left(rbtree_t *rbtree, rbnode_t *node)$/;"	f	file:
+rbtree_rotate_right	dig_rb_tree.c	/^rbtree_rotate_right(rbtree_t *rbtree, rbnode_t *node)$/;"	f	file:
+rbtree_search	dig_rb_tree.c	/^rbtree_search (rbtree_t *rbtree, const void *key)$/;"	f
+rbtree_t	dig_rb_tree.h	/^struct rbtree_t {$/;"	s
+rbtree_t	dig_rb_tree.h	/^typedef struct rbtree_t rbtree_t;$/;"	t	typeref:struct:rbtree_t
+real_time_param	dig_thread_pool.h	/^    void *real_time_param;$/;"	m	struct:task_parameter
+rear	dynamic_queue.h	/^    int rear;$/;"	m	struct:__anon6
+right	dig_rb_tree.h	/^	rbnode_t   *right;$/;"	m	struct:rbnode_t
+root	dig_rb_tree.h	/^	rbnode_t    *root;$/;"	m	struct:rbtree_t
+sbindir	Makefile	/^sbindir = ${exec_prefix}\/sbin$/;"	m
+server_address_	zip_dns_server.c	/^    addr_t server_address_;$/;"	m	struct:dns_udp_server	file:
+server_socket_	zip_dns_server.c	/^    socket_t server_socket_;$/;"	m	struct:dns_udp_server	file:
+server_t	zip_dns_server.h	/^}server_t;$/;"	t	typeref:enum:__anon1
+server_type_	zip_dns_server.c	/^    server_t server_type_;$/;"	m	struct:dns_server	file:
+sharedstatedir	Makefile	/^sharedstatedir = ${prefix}\/com$/;"	m
+sig_int_event_	dns_cache.c	/^    struct event *sig_int_event_;$/;"	m	struct:dnscache	typeref:struct:dnscache::event	file:
+sig_term_event_	dns_cache.c	/^    struct event *sig_term_event_;$/;"	m	struct:dnscache	typeref:struct:dnscache::event	file:
+size	zip_memory_pool.c	/^    uint32_t            size;$/;"	m	struct:mem_block	file:
+socket_accept	zip_socket.c	/^socket_accept(socket_t *s)$/;"	f
+socket_bind	zip_socket.c	/^socket_bind(socket_t *s, const addr_t *addr)$/;"	f
+socket_close	zip_socket.c	/^socket_close(socket_t *s)$/;"	f
+socket_connect	zip_socket.c	/^socket_connect(socket_t *s, const addr_t *server_addr)$/;"	f
+socket_connect_with_timeout	zip_socket.c	/^socket_connect_with_timeout(socket_t *s,$/;"	f
+socket_get_fd	zip_socket.c	/^socket_get_fd(const socket_t *s)$/;"	f
+socket_get_peer_addr	zip_socket.c	/^socket_get_peer_addr(const socket_t *s, addr_t *peer_addr)$/;"	f
+socket_get_type	zip_socket.c	/^socket_get_type(const socket_t *s)$/;"	f
+socket_listen	zip_socket.c	/^socket_listen(socket_t *s, int pending_request)$/;"	f
+socket_open	zip_socket.c	/^socket_open(socket_t *s, int family, int type, int protocol)$/;"	f
+socket_read	zip_socket.c	/^socket_read(socket_t *s, void *buffer, size_t len)$/;"	f
+socket_read_from	zip_socket.c	/^socket_read_from(socket_t *s, void *buffer, size_t len, addr_t *source_addr)$/;"	f
+socket_set_addr_reusable	zip_socket.c	/^socket_set_addr_reusable(socket_t *s)$/;"	f
+socket_set_notimewait	zip_socket.c	/^socket_set_notimewait(socket_t *s)$/;"	f
+socket_set_rdtimeout	zip_socket.c	/^socket_set_rdtimeout(socket_t *s, int secs)$/;"	f
+socket_set_unblock	zip_socket.c	/^socket_set_unblock(socket_t *s, bool is_block)$/;"	f
+socket_t	zip_socket.h	/^}socket_t;$/;"	t	typeref:struct:msocket
+socket_write	zip_socket.c	/^socket_write(socket_t *s, void *buffer, size_t len)$/;"	f
+socket_write_to	zip_socket.c	/^socket_write_to(socket_t *s, void *buffer, size_t len, const addr_t *dest_addr)$/;"	f
+srcdir	Makefile	/^srcdir = .$/;"	m
+start_thread	dig_thread_pool.c	/^start_thread(thread_t *t)$/;"	f	file:
+state	dig_thread_pool.c	/^	thread_state_t 		state;$/;"	m	struct:thread	file:
+stop_call_back	dns_cache.c	/^stop_call_back(evutil_socket_t fd, short event, void *arg)$/;"	f	file:
+stop_thread	dig_thread_pool.c	/^stop_thread(thread_t *t)$/;"	f	file:
+subdir	Makefile	/^subdir = src_fork$/;"	m
+swap_int8	dig_rb_tree.c	/^static void swap_int8(uint8_t* x, uint8_t* y)$/;"	f	file:
+swap_np	dig_rb_tree.c	/^static void swap_np(rbnode_t** x, rbnode_t** y)$/;"	f	file:
+sysconfdir	Makefile	/^sysconfdir = ${prefix}\/etc$/;"	m
+target_alias	Makefile	/^target_alias = $/;"	m
+task	dig_thread_pool.c	/^typedef struct task$/;"	s	file:
+task_func_t	dig_thread_pool.h	/^typedef void *(*task_func_t)(task_param_t* parameter);$/;"	t
+task_list_aval_cond	dig_thread_pool.c	/^    pthread_cond_t      task_list_aval_cond;$/;"	m	struct:thread	file:
+task_list_lock	dig_thread_pool.c	/^	pthread_mutex_t 	task_list_lock;$/;"	m	struct:thread	file:
+task_list_t	dig_thread_pool.c	/^typedef struct task_list task_list_t;$/;"	t	typeref:struct:task_list	file:
+task_param_t	dig_thread_pool.h	/^}task_param_t;$/;"	t	typeref:struct:task_parameter
+task_parameter	dig_thread_pool.h	/^typedef struct task_parameter$/;"	s
+task_t	dig_thread_pool.c	/^}task_t;$/;"	t	typeref:struct:task	file:
+tasks	dig_thread_pool.c	/^	task_list_t 		tasks;$/;"	m	struct:thread	file:
+thread	dig_thread_pool.c	/^typedef struct thread$/;"	s	file:
+thread_count	dig_thread_pool.c	/^	uint32_t 		    thread_count;$/;"	m	struct:thread_pool	file:
+thread_func	dig_thread_pool.c	/^thread_func(void *param)$/;"	f	file:
+thread_local_data	dig_thread_pool.c	/^    void                *thread_local_data;$/;"	m	struct:thread	file:
+thread_local_data	dig_thread_pool.h	/^    void *thread_local_data;$/;"	m	struct:task_parameter
+thread_pool	dig_thread_pool.c	/^struct thread_pool$/;"	s	file:
+thread_pool_add_task_to_run	dig_thread_pool.c	/^thread_pool_add_task_to_run(thread_pool_t *tp, task_func_t func, void *param)$/;"	f
+thread_pool_create	dig_thread_pool.c	/^thread_pool_create(uint32_t thread_count)$/;"	f
+thread_pool_delete	dig_thread_pool.c	/^thread_pool_delete(thread_pool_t *tp)$/;"	f
+thread_pool_force_stop	dig_thread_pool.c	/^thread_pool_force_stop(thread_pool_t *tp)$/;"	f
+thread_pool_get_thread_count	dig_thread_pool.c	/^int thread_pool_get_thread_count(const thread_pool_t *pool)$/;"	f
+thread_pool_get_thread_data	dig_thread_pool.c	/^void *thread_pool_get_thread_data(thread_pool_t *pool, int thread_index)$/;"	f
+thread_pool_is_idle	dig_thread_pool.c	/^thread_pool_is_idle(thread_pool_t *tp)$/;"	f
+thread_pool_set_thread_data	dig_thread_pool.c	/^void thread_pool_set_thread_data(thread_pool_t *pool, $/;"	f
+thread_pool_start	dig_thread_pool.c	/^thread_pool_start(thread_pool_t *tp)$/;"	f
+thread_pool_stop	dig_thread_pool.c	/^thread_pool_stop(thread_pool_t *tp)$/;"	f
+thread_pool_t	dig_thread_pool.h	/^typedef struct thread_pool thread_pool_t;$/;"	t	typeref:struct:thread_pool
+thread_state_t	dig_thread_pool.c	/^}thread_state_t;$/;"	t	typeref:enum:__anon2	file:
+thread_t	dig_thread_pool.c	/^}thread_t;$/;"	t	typeref:struct:thread	file:
+threads	dig_thread_pool.c	/^	thread_t 		    *threads;$/;"	m	struct:thread_pool	file:
+tid	dig_thread_pool.c	/^	pthread_t 		    tid;$/;"	m	struct:thread	file:
+top_build_prefix	Makefile	/^top_build_prefix = ..\/$/;"	m
+top_builddir	Makefile	/^top_builddir = ..$/;"	m
+top_srcdir	Makefile	/^top_srcdir = ..$/;"	m
+transform	Makefile	/^transform = $(program_transform_name)$/;"	m
+type	zip_socket.h	/^    int type;$/;"	m	struct:msocket
+udp_read_event_	zip_dns_server.c	/^    struct event *udp_read_event_;$/;"	m	struct:dns_udp_server	typeref:struct:dns_udp_server::event	file:
+udp_server_	zip_dns_server.c	/^    dns_udp_server_t *udp_server_;$/;"	m	struct:dns_server	file:
+unit_size	zip_memory_pool.c	/^    uint32_t         unit_size;$/;"	m	struct:mem_pool	file:
+user_data_	zip_dns_server.c	/^    void *user_data_;$/;"	m	struct:dns_udp_server	file:
+value	dig_rb_tree.h	/^    void        *value;$/;"	m	struct:rbnode_t
+wire_name_to_human_name	zip_dns_lib.c	/^wire_name_to_human_name(const char *wire_name,$/;"	f

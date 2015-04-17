@@ -1,0 +1,137 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'optparse'
+require 'rack'
+require 'rack/server'
+require 'roadbike'
+require 'beacon'
+require 'roadbike/core/string'
+SERVICE_FILE_POSTFIX = "_service.rb"
+
+def display_helper
+    p "usage: beacon_service -c config_file_path -s [service1,service2...] [-l] [-i service_path]"
+    exit 
+end
+
+def parse_opt(args)
+    options = {}
+    OptionParser.new do |opts|
+        opts.separator ""
+
+        opts.on("-c", "--config file_path", "using input file as config file") do |path|
+            options[:config_file] = path
+        end 
+
+        opts.on("-i", "--include-service-path service_dir", "specify the dir which service file resides") do |path|
+            options[:service_dir] = path
+        end 
+
+
+        opts.on("-s", "--services x,y,z", Array, "list of services to run") do |services|
+            options[:services] = services
+        end
+
+        opts.on("-p", "--port port", "master service start port") do |port|
+            options[:port] = port
+        end
+
+        opts.on("-h", "--help", "show help info") do
+            display_helper
+        end
+
+        opts.on("-l", "--list-services", "list all the available services") do
+            options[:list_services] = true
+        end
+    end.parse!(args)
+    options
+end
+
+def list_available_services(options)
+    services = list_loaded_services
+    services += list_services_in_folder(options[:service_dir]) if options[:service_dir]
+    puts "available services are:"
+    puts services.map{|s| "\t+ #{s}"}.join("\n")
+end
+
+def run_services(options)
+    service_dir = options[:service_dir]
+    services = options[:services]
+    services.each do |service|
+        puts "start to launch service: #{service}"
+        pid = fork do
+            $0 = "beacon:" + service
+            Beacon::Config.init(options[:config_file])
+            RB::Log.init(Beacon::Config)
+            run_service(service_dir, service)
+        end
+        Process.detach(pid)
+        puts "service: #{service} started"
+    end
+end
+
+def run_service(service_dir, service_name)
+    load_service(service_dir, service_name) if service_dir
+    service_class_name = service_name + "Service"
+    const = Beacon::Service.constants.find{|c| c.to_s.include?(service_class_name)}
+    raise "unknown service #{service_name}" unless const
+    Beacon::Service.const_get(const).run
+end
+
+def load_service(service_dir, service_name)
+    return if list_loaded_services.include?(service_name)
+    raise "#{service_name} not exists in #{service_dir}" unless list_services_in_folder(service_dir).include?(service_name)
+    require File.join(service_dir, normalize_file_name(service_name) +  SERVICE_FILE_POSTFIX)
+end
+
+def list_loaded_services
+    Beacon::Service.constants.map do |c|
+        c.to_s.include?("Service") ? c.to_s.chomp("Service") : nil
+    end.compact
+end
+
+def list_services_in_folder(service_dir)
+    Dir[File.join(service_dir, "*.rb")].map do |f|
+        f.end_with?(SERVICE_FILE_POSTFIX) ? normalize_sevice_name(File.basename(f).sub(SERVICE_FILE_POSTFIX, "")) : nil
+    end.compact
+end
+
+def normalize_sevice_name(name)
+    String.new(name).from_underscore
+end
+
+def normalize_file_name(name)
+    String.new(name).to_underscore
+end
+
+def run_grid_server(options)
+    puts "start to launch grid service started"
+    server_port = options[:port] || 5678
+    pid = fork do
+        $0 = "beacon:GRIDService" 
+        Beacon::Config.init(options[:config_file])
+        RB::Log.init(Beacon::Config)
+        File.open(File.join(Beacon::Config.get("log_dir"), "grid_server.log"), 'w') do |f|
+            $stdout.reopen(f)
+            $stderr.reopen(f)
+        end
+        Rack::Server.start({:app => Beacon::GRIDService, :server => 'thin', :Port => server_port})
+    end
+    Process.detach(pid)
+
+    sleep 2
+    `curl -X POST --silent http://127.0.0.1:#{server_port}/service`
+    puts "grid service started"
+end
+
+options = parse_opt(ARGV)
+
+if options[:list_services]
+    list_available_services(options)
+elsif options[:config_file].nil?
+    display_helper 
+elsif options[:services].nil? || options[:services].empty?
+    run_grid_server(options)
+else
+    run_services(options)
+end
+

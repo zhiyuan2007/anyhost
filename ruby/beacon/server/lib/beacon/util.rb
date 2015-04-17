@@ -1,0 +1,6 @@
+require 'roadbike'
+require 'beacon/util/system_info'
+require 'beacon/util/web_service_helper'
+require 'beacon/util/op_db'
+require 'beacon/util/command_send'
+require 'beacon/util/command'
