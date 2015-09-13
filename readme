@@ -1,0 +1,34 @@
+h1. this tool is used to control remote machine
+
+h1. required packages
+
+> python 2.6 or higher
+> paramkio (yum install python-dev && easy_install paramiko)
+
+h1 .the usage as follows:
+
+<pre>
+Usage: anyhost [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -H HOST, --host=HOST  remote host, domain or ip is ok, can be have many -H
+                        option (required unless given -f option)
+  -p PASSWD, --passwd=PASSWD
+                        password (required)
+  -u USER, --user=USER  username (required)
+  -m CMD, --cmd=CMD     list of commands will be run in remote host, can be
+                        have many -m option (required)
+  -s SRC, --src=SRC     source file, absolute path
+  -t TRANSFER, --transfer=TRANSFER
+                        transfer mode, upload or download
+  -d DEST, --dest=DEST  destination filename, absolute path
+  -S, --sudo            whether run cmd as root
+  -T, --thread          multi-thread mode
+  -f HOSTFILE, --hostfile=HOSTFILE
+                        host file, used when there is many host need run
+                        command
+  -w WRITEFILE, --write=WRITEFILE
+                        store result of command excecuted, filename is
+                        hostname + writefile if using -T option
+</pre>
