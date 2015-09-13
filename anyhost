@@ -151,7 +151,7 @@ def getopt():
 if __name__ == '__main__':
    options = getopt()
    if (not options.host and not options.hostfile)  or not options.user or not options.passwd or not options.cmd:
-       print "missing required parameter... "
+       print "missing required parameter.... "
        print "must given -H(host), -u(user), -p(passwd), -m(cmd) option"
        print "use anyhost -h print help"
        sys.exit(1)
