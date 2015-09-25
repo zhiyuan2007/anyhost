@@ -18,7 +18,7 @@ Options:
                         password (required)
   -u USER, --user=USER  username (required)
   -m CMD, --cmd=CMD     list of commands will be run in remote host, can be
-                        have many -m option (required)
+                        have many -m option (required unless -s and -d if given)
   -s SRC, --src=SRC     source file, absolute path
   -t TRANSFER, --transfer=TRANSFER
                         transfer mode, upload or download
