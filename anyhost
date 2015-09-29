@@ -54,7 +54,7 @@ class PySSH(object):
         output=stdout.read()
         session.close()
         return output
-    def download_file(self, remote_path, local_path) :
+    def download_file(self, remote_path, local_path, host) :
        sftp = self.ssh.open_sftp()
        remote_dir = os.path.dirname(remote_path)
        try:
@@ -62,6 +62,7 @@ class PySSH(object):
        except IOError:
            print >> stderr, "remote dir not exists"
            return 
+       local_path = local_path + "." + host
        sftp.get(remote_path, local_path)
        sftp.close()
     def upload_file(self, local_path, remote_path):
@@ -72,6 +73,8 @@ class PySSH(object):
        except IOError:
            sftp.mkdir(remote_dir)  # Create remote_path
            sftp.chdir(remote_dir)
+       print local_path
+       print remote_path
        sftp.put(local_path, remote_path)
        sftp.close()
 
@@ -89,15 +92,24 @@ class RemoteControl():
     def run_cmd_on_multithread(self, hosts, options):
         threads = []
         for host in hosts:
-            t = threading.Thread(target=self._run_cmd_at_host, args=(host, options))
-            threads.append(t)
-            t.start()
+            try:
+                t = threading.Thread(target=self._run_cmd_at_host, args=(host, options))
+                t.setDaemon(True)
+                threads.append(t)
+                t.start()
+            except Exception, e:
+                print "start thread failed %s, %s" % (host, e)
+                continue
+        
+        for t in threads: 
+            t.join(options.timeout)
 
     def run_cmd_on_sequence(self, hosts, options):
         for host in hosts:
            self._run_cmd_at_host(host, options)
 
     def _run_cmd_at_host(self, host, options):
+           print host
            fp = sys.stdout
            if options.writefile:
               try:
@@ -113,7 +125,7 @@ class RemoteControl():
               if options.transfer == 'upload':
                  ssh.upload_file(options.src, options.dest)
               elif options.transfer == "download":
-                 ssh.download_file(options.dest, options.src)
+                 ssh.download_file(options.dest, options.src, host)
            if options.cmd:
                for cmd in options.cmd:
                    output=ssh.runcmd(cmd, options.sudo)
@@ -145,15 +157,16 @@ def getopt():
     parser.add_option("-T", "--thread", dest = 'thread', action="store_true", help = "multi-thread mode") 
     parser.add_option("-f", "--hostfile", dest = 'hostfile', help = 'host file, used when there is many host need run command')
     parser.add_option("-w", "--write", dest = 'writefile', help = 'store result of command excecuted, filename is hostname + writefile if using -T option')
+    parser.add_option("-i", "--timeout", dest = 'timeout', default = 1800, type = int, help = 'timeout of each thread if using -T option')
     opts, args = parser.parse_args()
     return opts
 
 if __name__ == '__main__':
    options = getopt()
-   if (not options.host and not options.hostfile)  or not options.user or not options.passwd or not options.cmd:
-       print "missing required parameter.... "
-       print "must given -H(host), -u(user), -p(passwd), -m(cmd) option"
-       print "use anyhost -h print help"
+   if (not options.host and not options.hostfile)  or not options.user or not options.passwd or (not options.cmd and (not options.src and not options.dest)):
+       print "missing required parameter... "
+       print "must given -H(host) or -f(hostfile), -u(user), -p(passwd), -m(cmd) or [-s -d -t] option"
+       print "use %s -h print help" % sys.argv[0]
        sys.exit(1)
    rc = RemoteControl()
    rc.run_cmd(options)
