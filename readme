@@ -8,7 +8,8 @@ h1. required packages
 h1 .the usage as follows:
 
 <pre>
-Usage: anyhost [options]
+
+Usage: rpctool [options]
 
 Options:
   -h, --help            show this help message and exit
@@ -18,7 +19,7 @@ Options:
                         password (required)
   -u USER, --user=USER  username (required)
   -m CMD, --cmd=CMD     list of commands will be run in remote host, can be
-                        have many -m option (required unless -s and -d if given)
+                        have many -m option (required)
   -s SRC, --src=SRC     source file, absolute path
   -t TRANSFER, --transfer=TRANSFER
                         transfer mode, upload or download
@@ -29,8 +30,33 @@ Options:
                         host file, used when there is many host need run
                         command
   -w WRITEFILE, --write=WRITEFILE
-                        store result of command excecuted, filename is
-                        hostname + writefile if using -T option
+                        store result of command executed, valid if using -T
+                        option
+  -i TIMEOUT, --timeout=TIMEOUT
+                        timeout of each thread if using -T option
+
 </pre>
 
-add
+<pre>
+
+example:
+1. upload file dns_node.conf 
+./rpctool -H w-f01.tool.zzct.test.net -s /home/liuguirong/wire_selfcdn/dns_node.conf -d /home/liuguirong/dns_node.conf -t upload -u xxxxxx -p xxxxxxx
+2. execute command
+./rpctool -H w-f01.tool.zzct.test.net -u xxxxxx -p xxxxxxx -m "df -m"
+3. execute many commands once
+./rpctool -H w-f01.tool.zzct.test.net -u xxxxxx -p xxxxxxx -m "df -m" -m "ifconfig" -m "ls -l"
+4. execute many commands once as sudo user
+./rpctool -H w-f01.tool.zzct.test.net -u xxxxxx -p xxxxxxx -m "df -m" -m "ifconfig" -m "ls -l" -S
+5. execute commands on many hosts on sequence
+./rpctool -f node.conf -u xxxxxx -p xxxxxxx -m "df -m"
+    node.conf content is:
+    hostname1
+    hostname2 
+6. execute commands on many hosts at same time
+./rpctool -f node.conf -u xxxxxx -p xxxxxxx -m "df -m" -T
+    node.conf content is:
+    hostname1
+    hostname2 
+
+</pre>
