@@ -60,8 +60,11 @@ class RemoteSSH(object):
             self.transport = paramiko.Transport((hostname,port))
             self.transport.connect(username=username,password=password)
         except (socket.error,paramiko.AuthenticationException) as message:
-            print waring_msg("ERROR: SSH connection to "+self.hostname+" failed: " +str(message))
-            sys.exit(1)
+            print fail_msg("ERROR: SSH connection to "+self.hostname+" failed: " +str(message))
+            return None
+        except Exception,e:
+            print fail_msg("ERRORINFO: " + self.hostname + "reason: " + str(e))
+            return None
         return  self.transport is not None
  
     def runcmd(self,cmd,sudoenabled=False):
@@ -71,16 +74,20 @@ class RemoteSSH(object):
             fullcmd=cmd
         if self.transport is None:
             return "ERROR: connection was not established"
-        session=self.transport.open_session()
-        session.set_combine_stderr(True)
-        #print "fullcmd ==== "+fullcmd
-        if sudoenabled:
-            session.get_pty()
-        session.exec_command(fullcmd)
-        stdout = session.makefile('rb', -1)
-        #print stdout.read()
-        output=stdout.read()
-        session.close()
+        try:
+            session=self.transport.open_session()
+            session.set_combine_stderr(True)
+            #print "fullcmd ==== "+fullcmd
+            if sudoenabled:
+                session.get_pty()
+            session.exec_command(fullcmd)
+            stdout = session.makefile('rb', -1)
+            #print stdout.read()
+            output=stdout.read()
+            session.close()
+        except Exception,e:
+            print fail_msg("Runcmd Error: " + str(e))
+            return "cmd " + cmd + "run failed"
         return output
 
     def download_file(self, remote_path, local_path, host, multi_thread=False) :
@@ -168,7 +175,11 @@ class RemoteControl():
         password = options.passwd 
     
         ssh = RemoteSSH()
-        ssh.connect(host, username, password)
+        conned = ssh.connect(host, username, password)
+        if not conned:
+            if fp != sys.stdout:
+                fp.close()
+                return
         if options.src and options.dest:
            if options.transfer == 'upload':
               ssh.upload_file(options.src, options.dest)
@@ -212,8 +223,8 @@ def getopt():
 if __name__ == '__main__':
    options, parser = getopt()
    if (not options.host and not options.hostfile)  or not options.user or not options.passwd or (not options.cmd and (not options.src and not options.dest)):
-       print waring_msg("missing required parameter... ")
-       print waring_msg("must given -H(host), -u(user), -p(passwd), -m(cmd) option")
+       print header_msg("missing required parameter... ")
+       print blue_msg("must given -H(host), -u(user), -p(passwd), -m(cmd) option")
        print waring_msg("use rpctool -h print help")
        parser.print_help()
        sys.exit(1)
