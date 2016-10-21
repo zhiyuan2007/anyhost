@@ -1,14 +1,42 @@
 #!/usr/bin/env python
 import os,sys
-import commands
 import threading
 import socket
 import paramiko
 from optparse import OptionParser
 #=================================
-# Class: PySSH
+# Copyright by liuguirong
+# create by liuguirong 2015-7-10
 #=================================
-class PySSH(object):
+
+class Bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+
+def waring_msg(msg):
+    return Bcolors.WARNING + msg + Bcolors.ENDC
+
+def green_msg(msg):
+    return Bcolors.OKGREEN + msg + Bcolors.ENDC
+
+def blue_msg(msg):
+    return Bcolors.OKBLUE + msg + Bcolors.ENDC
+
+def fail_msg(msg):
+    return Bcolors.FAIL + msg + Bcolors.ENDC
+
+def header_msg(msg):
+    return Bcolors.HEADER + msg + Bcolors.ENDC
+
+def bold_msg(msg):
+    return Bcolors.BOLD + msg + Bcolors.ENDC
+
+class RemoteSSH(object):
     def __init__ (self):
         self.ssh = None
         self.transport = None 
@@ -29,11 +57,14 @@ class PySSH(object):
         self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         self.ssh.load_system_host_keys()
         try:
-            self.ssh.connect(hostname,port,username,password)
-            self.transport=self.ssh.get_transport()
+            self.transport = paramiko.Transport((hostname,port))
+            self.transport.connect(username=username,password=password)
         except (socket.error,paramiko.AuthenticationException) as message:
-            print "ERROR: SSH connection to "+self.hostname+" failed: " +str(message)
-            sys.exit(1)
+            print fail_msg("ERROR: SSH connection to "+self.hostname+" failed: " +str(message))
+            return None
+        except Exception,e:
+            print fail_msg("ERRORINFO: " + self.hostname + "reason: " + str(e))
+            return None
         return  self.transport is not None
  
     def runcmd(self,cmd,sudoenabled=False):
@@ -43,38 +74,47 @@ class PySSH(object):
             fullcmd=cmd
         if self.transport is None:
             return "ERROR: connection was not established"
-        session=self.transport.open_session()
-        session.set_combine_stderr(True)
-        #print "fullcmd ==== "+fullcmd
-        if sudoenabled:
-            session.get_pty()
-        session.exec_command(fullcmd)
-        stdout = session.makefile('rb', -1)
-        #print stdout.read()
-        output=stdout.read()
-        session.close()
+        try:
+            session=self.transport.open_session()
+            session.set_combine_stderr(True)
+            #print "fullcmd ==== "+fullcmd
+            if sudoenabled:
+                session.get_pty()
+            session.exec_command(fullcmd)
+            stdout = session.makefile('rb', -1)
+            #print stdout.read()
+            output=stdout.read()
+            session.close()
+        except Exception,e:
+            print fail_msg("Runcmd Error: " + str(e))
+            return "cmd " + cmd + "run failed"
         return output
-    def download_file(self, remote_path, local_path, host) :
-       sftp = self.ssh.open_sftp()
+
+    def download_file(self, remote_path, local_path, host, multi_thread=False) :
+       sftp = paramiko.SFTPClient.from_transport(self.transport)
        remote_dir = os.path.dirname(remote_path)
        try:
            sftp.chdir(remote_dir)  # Test if remote_path exists
        except IOError:
-           print >> stderr, "remote dir not exists"
+           print >> sys.stderr, "remote dir not exists"
            return 
-       local_path = local_path + "." + host
+       if multi_thread:
+          local_path = local_path + "." + host
+       print blue_msg("localfile:" + local_path)
+       print blue_msg("remotefile:" + remote_path)
        sftp.get(remote_path, local_path)
        sftp.close()
+
     def upload_file(self, local_path, remote_path):
        remote_dir = os.path.dirname(remote_path)
-       sftp = self.ssh.open_sftp()
+       sftp = paramiko.SFTPClient.from_transport(self.transport)
        try:
            sftp.chdir(remote_dir)  # Test if remote_path exists
        except IOError:
            sftp.mkdir(remote_dir)  # Create remote_path
            sftp.chdir(remote_dir)
-       print local_path
-       print remote_path
+       print blue_msg("localfile:" + local_path)
+       print blue_msg("remotefile:" + remote_path)
        sftp.put(local_path, remote_path)
        sftp.close()
 
@@ -86,6 +126,7 @@ class RemoteControl():
        else:
           hosts = options.host
        if options.thread :
+           print blue_msg("[multi-thread-mode]: remote command is executing, please waiting...")
            self.run_cmd_on_multithread(hosts, options)
        else:
            self.run_cmd_on_sequence(hosts, options)
@@ -98,41 +139,59 @@ class RemoteControl():
                 threads.append(t)
                 t.start()
             except Exception, e:
-                print "start thread failed %s, %s" % (host, e)
+                print waring_msg("start thread failed %s, %s" % (host, e))
                 continue
         
         for t in threads: 
             t.join(options.timeout)
+
+        result = ""
+        if options.writefile:
+           for host in hosts:
+              tmp_file = options.writefile + "." + host
+              if os.path.exists(tmp_file):
+                  result += open(tmp_file).read()
+                  os.remove(tmp_file)
+
+        with open(options.writefile , "w") as fp:
+            fp.write(result)
+
+        print >> sys.stdout, green_msg(result)
 
     def run_cmd_on_sequence(self, hosts, options):
         for host in hosts:
            self._run_cmd_at_host(host, options)
 
     def _run_cmd_at_host(self, host, options):
-           print host
-           fp = sys.stdout
-           if options.writefile:
-              try:
-                  fp = open(host + "." + options.writefile, "a")
-              except:
-                  print >> sys.stderr, "could not create result file"
-           username = options.user
-           password = options.passwd 
+        fp = sys.stdout
+        if options.thread and options.writefile:
+           try:
+               fp = open(options.writefile + "." + host, "w")
+           except:
+               print >> sys.stderr, waring_msg("could not create result file")
+               os.exit(1)
+        print >> fp, blue_msg(host)
+        username = options.user
+        password = options.passwd 
     
-           ssh = PySSH()
-           ssh.connect(host,username,password)
-           if options.src and options.dest:
-              if options.transfer == 'upload':
-                 ssh.upload_file(options.src, options.dest)
-              elif options.transfer == "download":
-                 ssh.download_file(options.dest, options.src, host)
-           if options.cmd:
-               for cmd in options.cmd:
-                   output=ssh.runcmd(cmd, options.sudo)
-                   print >> fp, output
-           ssh.disconnect()
-           if fp != sys.stdout:
-               fp.close()
+        ssh = RemoteSSH()
+        conned = ssh.connect(host, username, password)
+        if not conned:
+            if fp != sys.stdout:
+                fp.close()
+                return
+        if options.src and options.dest:
+           if options.transfer == 'upload':
+              ssh.upload_file(options.src, options.dest)
+           elif options.transfer == "download":
+              ssh.download_file(options.dest, options.src, host, options.thread)
+        if options.cmd:
+            for cmd in options.cmd:
+                output=ssh.runcmd(cmd, options.sudo)
+                print >> fp,  green_msg(output)
+        ssh.disconnect()
+        if fp != sys.stdout:
+            fp.close()
 
     def get_host_from_file(self, filename):
        fp = open(filename, "r")
@@ -156,17 +215,18 @@ def getopt():
     parser.add_option("-S", "--sudo", action="store_true",  dest = 'sudo', help = "whether run cmd as root")
     parser.add_option("-T", "--thread", dest = 'thread', action="store_true", help = "multi-thread mode") 
     parser.add_option("-f", "--hostfile", dest = 'hostfile', help = 'host file, used when there is many host need run command')
-    parser.add_option("-w", "--write", dest = 'writefile', help = 'store result of command excecuted, filename is hostname + writefile if using -T option')
+    parser.add_option("-w", "--write", dest = 'writefile', help = 'store result of command executed, valid if using -T option', default = "/tmp/run_rpc_result.txt")
     parser.add_option("-i", "--timeout", dest = 'timeout', default = 1800, type = int, help = 'timeout of each thread if using -T option')
     opts, args = parser.parse_args()
-    return opts
+    return opts, parser
 
 if __name__ == '__main__':
-   options = getopt()
+   options, parser = getopt()
    if (not options.host and not options.hostfile)  or not options.user or not options.passwd or (not options.cmd and (not options.src and not options.dest)):
-       print "missing required parameter... "
-       print "must given -H(host) or -f(hostfile), -u(user), -p(passwd), -m(cmd) or [-s -d -t] option"
-       print "use %s -h print help" % sys.argv[0]
+       print header_msg("missing required parameter... ")
+       print blue_msg("must given -H(host), -u(user), -p(passwd), -m(cmd) option")
+       print waring_msg("use rpctool -h print help")
+       parser.print_help()
        sys.exit(1)
    rc = RemoteControl()
    rc.run_cmd(options)
