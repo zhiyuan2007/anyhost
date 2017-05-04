@@ -9,7 +9,7 @@ h1 .the usage as follows:
 
 <pre>
 
-Usage: rpctool [options]
+Usage: anhost [options]
 
 Options:
   -h, --help            show this help message and exit
@@ -37,24 +37,25 @@ Options:
 
 </pre>
 
+h1. example
+
 <pre>
 
-example:
 1. upload file dns_node.conf 
-./rpctool -H w-f01.tool.zzct.test.net -s /home/liuguirong/wire_selfcdn/dns_node.conf -d /home/liuguirong/dns_node.conf -t upload -u xxxxxx -p xxxxxxx
+./anyhost -H w-f01.tool.zzct.test.net -s /home/liuguirong/wire_selfcdn/dns_node.conf -d /home/liuguirong/dns_node.conf -t upload -u xxxxxx -p xxxxxxx
 2. execute command
-./rpctool -H w-f01.tool.zzct.test.net -u xxxxxx -p xxxxxxx -m "df -m"
+./anyhost -H w-f01.tool.zzct.test.net -u xxxxxx -p xxxxxxx -m "df -m"
 3. execute many commands once
-./rpctool -H w-f01.tool.zzct.test.net -u xxxxxx -p xxxxxxx -m "df -m" -m "ifconfig" -m "ls -l"
+./anyhost -H w-f01.tool.zzct.test.net -u xxxxxx -p xxxxxxx -m "df -m" -m "ifconfig" -m "ls -l"
 4. execute many commands once as sudo user
-./rpctool -H w-f01.tool.zzct.test.net -u xxxxxx -p xxxxxxx -m "df -m" -m "ifconfig" -m "ls -l" -S
+./anyhost -H w-f01.tool.zzct.test.net -u xxxxxx -p xxxxxxx -m "df -m" -m "ifconfig" -m "ls -l" -S
 5. execute commands on many hosts on sequence
-./rpctool -f node.conf -u xxxxxx -p xxxxxxx -m "df -m"
+./anyhost -f node.conf -u xxxxxx -p xxxxxxx -m "df -m"
     node.conf content is:
     hostname1
     hostname2 
 6. execute commands on many hosts at same time
-./rpctool -f node.conf -u xxxxxx -p xxxxxxx -m "df -m" -T
+./anyhost -f node.conf -u xxxxxx -p xxxxxxx -m "df -m" -T
     node.conf content is:
     hostname1
     hostname2 
