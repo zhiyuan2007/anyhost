@@ -225,7 +225,7 @@ if __name__ == '__main__':
    if (not options.host and not options.hostfile)  or not options.user or not options.passwd or (not options.cmd and (not options.src and not options.dest)):
        print header_msg("missing required parameter... ")
        print blue_msg("must given -H(host), -u(user), -p(passwd), -m(cmd) option")
-       print waring_msg("use rpctool -h print help")
+       print waring_msg("use anyhost -h print help")
        parser.print_help()
        sys.exit(1)
    rc = RemoteControl()
